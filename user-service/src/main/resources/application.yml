@@ -1,0 +1,40 @@
+spring:  
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+      enabled: true
+
+server:
+  port: 10003
+  tomcat:
+    max-http-post-size: 2MB
+    max-swallow-size: 2MB 
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    hostname: http://localhost:10003
+    statusPageUrl: http://localhost:10003/actuator/info
+    healthCheckUrl:  http://localhost:10003/actuator/health
+    homePageUrl:  http://localhost:10003
+    instance-id: user-service
+     
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+aws:
+  config:
+    aws-access-key-id: ${RPM_AWS_ACCESS_KEY}
+    aws-secret-access-key: ${RPM_AWS_SECRET_ACCESS_KEY}
+    s3-endpoint: https://s3.us-east-2.amazonaws.com
+    bucket-name: rpm-asset
+    bucket-region: us-east-2
